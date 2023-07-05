@@ -1,19 +1,43 @@
 
 // Đối tượng `Validator`
-function validator (options) {
+function validator(options) {
+
+
+  // Tạo hàm validate để gán đoạn code kiểm tra lỗi
+  // Hàm thực hiện validate
+  function validate(inputElement, rule) {
+    var errorElement = inputElement.parentElement.querySelector('.form-message');
+    // Lấy value: từ inputElement.value
+    // láy hàm test từ rules.test
+    var errorMessage = rule.test(inputElement.value);
+    if (errorMessage) {
+      errorElement.innerText = errorMessage;
+      inputElement.parentElement.classList.add('invalid');
+    } else {
+      errorElement.innerText = '';
+      inputElement.parentElement.classList.remove('invalid');
+    }
+  }
+
+  // lấy element của form cần validate
   var formElement = document.querySelector(options.form);
-  if (formElement){
-    options.rules.forEach(function(rule) {
+  if (formElement) {
+    options.rules.forEach(function (rule) {
       var inputElement = formElement.querySelector(rule.selector);
-      if(inputElement){
-        inputElement.onblur = function (){
-          // Lấy value: từ inputElement.value
-          // láy hàm test từ rules.test
-          var errorMessage = rule.test(inputElement.value);
-          if ()
+      if (inputElement) {
+        // Xử lý trường hợp blur khỏi input
+        inputElement.onblur = function () {
+          validate(inputElement, rule);
+          // console.log(errorMessage);
+        }
+        // Xử lý trường hợp mỗi khi người dùng nhập vào input 
+        inputElement.oninput = function () {
+          var errorElement = inputElement.parentElement.querySelector('.form-message');
+          errorElement.innerText = '';
+          inputElement.parentElement.classList.remove('invalid');
         }
       }
-    }); 
+    });
   }
 }
 
@@ -36,8 +60,9 @@ validator.isRequired = function (selector) {
 validator.isEmail = function (selector) {
   return {
     selector: selector,
-    test: function () {
-       
+    test: function (value) {
+      var regex = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
+      return regex.test(value) ? undefined : "Trường này phải là email";
     }
   };
 }
