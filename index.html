@@ -73,10 +73,14 @@
       // Mong muốn sau này sẽ lập trình theo hướng đối tượng
       validator({
         form: '#form-1',
-        
+        errorSelector: '.form-message',
         rules: [
-          validator.isRequired('#fullname'),
-          validator.isEmail('#email'),
+          validator.isRequired('#fullname', 'Bạn vẫn chưa nhập tên đăng nhập'),
+          validator.isEmail('#email', 'Nhập email đê'),
+          validator.minLength('#password', 6, 'Gì mà ít vậy ba 😂😂😂'),
+          validator.isConfirmed('#password_confirmation', function() {
+            return document.querySelector('#form-1 #password').value;
+          }, 'Mật khẩu nhập lại không chính xác'),
         ]
       });
     </script>
