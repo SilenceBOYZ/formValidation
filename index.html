@@ -73,15 +73,23 @@
       // Mong muốn sau này sẽ lập trình theo hướng đối tượng
       validator({
         form: '#form-1',
+        formGroupSelector: '.form-group',
         errorSelector: '.form-message',
         rules: [
           validator.isRequired('#fullname', 'Bạn vẫn chưa nhập tên đăng nhập'),
+          validator.isRequired('#email', 'Bạn vẫn chưa nhập email'),
           validator.isEmail('#email', 'Nhập email đê'),
+          // Bị ghi đè code
+          validator.isRequired('#password', 'Bạn vẫn chưa nhập mật khẩu'),
           validator.minLength('#password', 6, 'Gì mà ít vậy ba 😂😂😂'),
+          validator.isRequired('#password_confirmation', 'Bạn vẫn xác nhận mật khẩu'),
           validator.isConfirmed('#password_confirmation', function() {
             return document.querySelector('#form-1 #password').value;
           }, 'Mật khẩu nhập lại không chính xác'),
-        ]
+        ],
+        onSubmit: function (data) {
+          console.log(data);
+        }
       });
     </script>
   
