@@ -44,6 +44,14 @@ html {
   flex-direction: column;
 }
 
+.form-group .horizontal{
+  display: flex;
+  justify-content: start;
+  align-items: center;
+  gap: 1.2rem;
+  font-size: 1.6rem;
+} 
+
 .form-label,
 .form-message {
   text-align: left;
@@ -104,3 +112,4 @@ html {
 .spacer {
   margin-top: 36px;
 }
+

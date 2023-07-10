@@ -64,6 +64,71 @@
           <span class="form-message"></span>
         </div>
 
+        <div class="form-group">
+          <label for="avatar" class="form-label"
+            >Ảnh đại diện</label
+          >
+          <input
+            id="avatar"
+            name="avatar"
+            type="file"
+            class="form-control"
+          />
+          <span class="form-message"></span>
+        </div>
+
+        <div class="form-group">
+          <label for="province" class="form-label"
+            >--Tỉnh/TP--</label
+          >
+          <select
+            id="province"
+            name="province"
+            class="form-control">
+            <option value="">-- Chọn Tỉnh/TP</option>
+            <option value="hcm">Hồ Chí Minh</option>
+            <option value="bt">Bến Tre</option>
+          </select>
+          <span class="form-message"></span>
+        </div>
+
+        <!-- Xử lý phần checkBox -->
+        <div class="form-group">
+          <label for="password_confirmation" class="form-label"
+            >Giới tính</label
+          >
+          <div class="horizontal">
+            <input
+            name="gender"
+            type="checkbox"
+            class="form-control"
+            value="male"
+            />
+            <label for="">Nam</label>
+          </div>
+
+          <div class="horizontal">
+            <input
+            name="gender"
+            type="checkbox"
+            class="form-control"
+            value="female"
+            />
+            <label for="">Nữ</label>
+          </div>
+
+          <div class="horizontal">
+            <input
+            name="gender"
+            type="checkbox"
+            class="form-control"
+            value="other"
+            />
+            <label for="">Khác</label>
+          </div>
+
+          <span class="form-message"></span>
+        </div>
         <button class="form-submit">Đăng ký</button>
       </form>
     </div>
@@ -72,26 +137,38 @@
     <script>
       // Mong muốn sau này sẽ lập trình theo hướng đối tượng
       validator({
-        form: '#form-1',
-        formGroupSelector: '.form-group',
-        errorSelector: '.form-message',
+        form: "#form-1",
+        formGroupSelector: ".form-group",
+        errorSelector: ".form-message",
         rules: [
-          validator.isRequired('#fullname', 'Bạn vẫn chưa nhập tên đăng nhập'),
-          validator.isRequired('#email', 'Bạn vẫn chưa nhập email'),
-          validator.isEmail('#email', 'Nhập email đê'),
-          // Bị ghi đè code
-          validator.isRequired('#password', 'Bạn vẫn chưa nhập mật khẩu'),
-          validator.minLength('#password', 6, 'Gì mà ít vậy ba 😂😂😂'),
-          validator.isRequired('#password_confirmation', 'Bạn vẫn xác nhận mật khẩu'),
-          validator.isConfirmed('#password_confirmation', function() {
-            return document.querySelector('#form-1 #password').value;
-          }, 'Mật khẩu nhập lại không chính xác'),
+          // validator.isRequired("#fullname", "Bạn vẫn chưa nhập tên đăng nhập"),
+          // validator.isRequired("#email", "Bạn vẫn chưa nhập email"),
+          // validator.isEmail("#email", "Nhập email đê"),
+          validator.isRequired("#avatar", "Chọn ảnh đê"),
+          // // Bị ghi đè code
+          // validator.isRequired("#password", "Bạn vẫn chưa nhập mật khẩu"),
+          // validator.minLength("#password", 6, "Gì mà ít vậy ba 😂😂😂"),
+          // validator.isRequired(
+          //   "#password_confirmation",
+          //   "Bạn vẫn xác nhận mật khẩu"
+          // ),
+          // validator.isRequired(
+          //   "#province",
+          //   "Vui lòng chọn tỉnh thành phố"
+          // ),
+          // validator.isConfirmed(
+          //   "#password_confirmation",
+          //   function () {
+          //     return document.querySelector("#form-1 #password").value;
+          //   },
+          //   "Mật khẩu nhập lại không chính xác"
+          // ),
+          // validator.isRequired('input[name="gender"]')
         ],
         onSubmit: function (data) {
           console.log(data);
-        }
+        },
       });
     </script>
-  
-</body>
+  </body>
 </html>
